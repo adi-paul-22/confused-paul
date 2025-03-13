@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Code, Palette, Leaf, Briefcase, Football, Plane, GraduationCap, Lightbulb } from "lucide-react";
+import { Code, Palette, Leaf, Briefcase, Trophy, Plane, GraduationCap, Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface InterestCardProps {
@@ -46,7 +46,7 @@ const interests = [
     description: "Helping businesses solve complex problems with strategic thinking"
   },
   {
-    icon: <Football className="h-6 w-6" />,
+    icon: <Trophy className="h-6 w-6" />,
     title: "Football & FC Barcelona",
     description: "Devoted fan of the beautiful game and Barça's artistry on the field"
   },

@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Code, Palette, Leaf, Briefcase, Football, Plane, GraduationCap, Lightbulb } from "lucide-react";
+import { Code, Palette, Leaf, Briefcase, Trophy, Plane, GraduationCap, Lightbulb } from "lucide-react";
 
 interface Category {
   id: string;
@@ -23,7 +23,7 @@ const categories: Category[] = [
   { id: "art", label: "Art", icon: <Palette className="h-4 w-4" /> },
   { id: "sustainability", label: "Sustainability", icon: <Leaf className="h-4 w-4" /> },
   { id: "consulting", label: "Consulting", icon: <Briefcase className="h-4 w-4" /> },
-  { id: "football", label: "Football", icon: <Football className="h-4 w-4" /> },
+  { id: "football", label: "Football", icon: <Trophy className="h-4 w-4" /> },
   { id: "travel", label: "Travel", icon: <Plane className="h-4 w-4" /> },
   { id: "mba", label: "MBA Prep", icon: <GraduationCap className="h-4 w-4" /> },
   { id: "startup", label: "Startups", icon: <Lightbulb className="h-4 w-4" /> },
