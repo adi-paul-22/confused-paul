@@ -97,13 +97,17 @@ const Portfolio = () => {
     : portfolioItems.filter(item => item.category === activeCategory);
 
   return (
-    <section id="portfolio" className="py-24 px-6 bg-secondary/50">
-      <div className="container max-w-6xl mx-auto">
+    <section id="portfolio" className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-background to-secondary/50 dark:from-background dark:to-background">
+      {/* Gradient accent */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+      
+      <div className="container max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-12">
           <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-4 opacity-0 animate-fade-in">
             My Work
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-fade-in animation-delay-100">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-fade-in animation-delay-100 bg-gradient-to-r from-foreground to-foreground/80 dark:from-white dark:to-white/70 bg-clip-text">
             Portfolio Showcase
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto opacity-0 animate-fade-in animation-delay-200">
@@ -121,8 +125,8 @@ const Portfolio = () => {
               className={cn(
                 "px-4 py-2 rounded-full text-sm font-medium transition-all-200 flex items-center gap-2",
                 activeCategory === category.id
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-background border hover:bg-secondary"
+                  ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground"
+                  : "bg-background border hover:bg-secondary dark:bg-secondary/20 dark:hover:bg-secondary/40"
               )}
             >
               {category.icon}
@@ -137,8 +141,8 @@ const Portfolio = () => {
             <div
               key={item.id}
               className={cn(
-                "group rounded-xl overflow-hidden border bg-card hover:shadow-xl transition-all-300 hover:-translate-y-1 opacity-0",
-                "animate-slide-up",
+                "group rounded-xl overflow-hidden border bg-card hover:shadow-xl transition-all-300 hover:-translate-y-1 opacity-0 backdrop-blur-sm",
+                "animate-slide-up bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30",
                 `animation-delay-${(index % 3) * 100 + 400}`
               )}
             >
