@@ -239,7 +239,7 @@
 .prose {
   --tw-prose-body: theme('colors.zinc.700');
   --tw-prose-headings: theme('colors.zinc.900');
-  --tw-prose-links: theme('colors.primary');
+  --tw-prose-links: theme('colors.primary.DEFAULT');
   --tw-prose-bold: theme('colors.zinc.900');
   --tw-prose-counters: theme('colors.zinc.500');
   --tw-prose-bullets: theme('colors.zinc.300');
@@ -257,7 +257,7 @@
 .dark .prose {
   --tw-prose-body: theme('colors.zinc.300');
   --tw-prose-headings: theme('colors.white');
-  --tw-prose-links: theme('colors.primary');
+  --tw-prose-links: theme('colors.primary.DEFAULT');
   --tw-prose-bold: theme('colors.white');
   --tw-prose-counters: theme('colors.zinc.400');
   --tw-prose-bullets: theme('colors.zinc.600');
