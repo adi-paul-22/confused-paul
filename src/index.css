@@ -76,6 +76,17 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    background-image: 
+      radial-gradient(at 80% 0%, hsla(225, 90%, 75%, 0.05) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(260, 90%, 75%, 0.05) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, hsla(195, 90%, 75%, 0.05) 0px, transparent 50%);
+  }
+
+  .dark body {
+    background-image: 
+      radial-gradient(at 80% 0%, hsla(225, 90%, 75%, 0.04) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(260, 90%, 75%, 0.04) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, hsla(195, 90%, 75%, 0.04) 0px, transparent 50%);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -140,11 +151,16 @@
   
   /* Glass card effect */
   .glass-card {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     position: relative;
+  }
+  
+  .dark .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .bg-blur {
@@ -212,4 +228,46 @@
       background-position: 0% 50%;
     }
   }
+}
+
+/* Light mode enhancements */
+.bg-pattern-light {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.prose {
+  --tw-prose-body: theme('colors.zinc.700');
+  --tw-prose-headings: theme('colors.zinc.900');
+  --tw-prose-links: theme('colors.primary');
+  --tw-prose-bold: theme('colors.zinc.900');
+  --tw-prose-counters: theme('colors.zinc.500');
+  --tw-prose-bullets: theme('colors.zinc.300');
+  --tw-prose-hr: theme('colors.zinc.200');
+  --tw-prose-quotes: theme('colors.zinc.900');
+  --tw-prose-quote-borders: theme('colors.zinc.200');
+  --tw-prose-captions: theme('colors.zinc.500');
+  --tw-prose-code: theme('colors.zinc.900');
+  --tw-prose-pre-code: theme('colors.zinc.100');
+  --tw-prose-pre-bg: theme('colors.zinc.900');
+  --tw-prose-th-borders: theme('colors.zinc.300');
+  --tw-prose-td-borders: theme('colors.zinc.200');
+}
+
+.dark .prose {
+  --tw-prose-body: theme('colors.zinc.300');
+  --tw-prose-headings: theme('colors.white');
+  --tw-prose-links: theme('colors.primary');
+  --tw-prose-bold: theme('colors.white');
+  --tw-prose-counters: theme('colors.zinc.400');
+  --tw-prose-bullets: theme('colors.zinc.600');
+  --tw-prose-hr: theme('colors.zinc.700');
+  --tw-prose-quotes: theme('colors.zinc.100');
+  --tw-prose-quote-borders: theme('colors.zinc.700');
+  --tw-prose-captions: theme('colors.zinc.400');
+  --tw-prose-code: theme('colors.white');
+  --tw-prose-pre-code: theme('colors.zinc.100');
+  --tw-prose-pre-bg: 'rgb(0 0 0 / 0.4)';
+  --tw-prose-th-borders: theme('colors.zinc.600');
+  --tw-prose-td-borders: theme('colors.zinc.700');
 }

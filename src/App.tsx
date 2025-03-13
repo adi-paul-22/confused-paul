@@ -8,6 +8,13 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "./components/ThemeProvider";
 
+// Import our new page components
+import Coding from "./pages/Coding";
+import Art from "./pages/Art";
+import Sustainability from "./pages/Sustainability";
+import Football from "./pages/Football";
+import Travel from "./pages/Travel";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -19,6 +26,14 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            
+            {/* New landing pages for each category */}
+            <Route path="/coding" element={<Coding />} />
+            <Route path="/art" element={<Art />} />
+            <Route path="/sustainability" element={<Sustainability />} />
+            <Route path="/football" element={<Football />} />
+            <Route path="/travel" element={<Travel />} />
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

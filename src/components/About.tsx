@@ -2,6 +2,7 @@
 import React from "react";
 import { Code, Palette, Leaf, Briefcase, Trophy, Plane, GraduationCap, Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface InterestCardProps {
   icon: React.ReactNode;
@@ -9,25 +10,46 @@ interface InterestCardProps {
   description: string;
   delay: number;
   gradientClass: string;
+  linkTo?: string;
 }
 
-const InterestCard = ({ icon, title, description, delay, gradientClass }: InterestCardProps) => (
-  <div 
-    className={cn(
-      "p-6 rounded-xl border border-border/50 hover:border-primary/20 transition-all-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 opacity-0",
-      "animate-slide-up glass-card overflow-hidden group",
-      `animation-delay-${delay}`,
-      gradientClass
-    )}
-  >
-    {/* Subtle RGB gradient hover effect */}
-    <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10"></div>
-    
-    <div className="mb-4 text-primary relative z-10">{icon}</div>
-    <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{title}</h3>
-    <p className="text-muted-foreground">{description}</p>
-  </div>
-);
+const InterestCard = ({ icon, title, description, delay, gradientClass, linkTo }: InterestCardProps) => {
+  const CardContent = () => (
+    <>
+      {/* Subtle RGB gradient hover effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10"></div>
+      
+      <div className="mb-4 text-primary relative z-10">{icon}</div>
+      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
+    </>
+  );
+
+  return linkTo ? (
+    <Link 
+      to={linkTo}
+      className={cn(
+        "p-6 rounded-xl border border-border/50 hover:border-primary/20 transition-all-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 opacity-0",
+        "animate-slide-up glass-card overflow-hidden group",
+        `animation-delay-${delay}`,
+        gradientClass
+      )}
+    >
+      <CardContent />
+    </Link>
+  ) : (
+    <div 
+      className={cn(
+        "p-6 rounded-xl border border-border/50 hover:border-primary/20 transition-all-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 opacity-0",
+        "animate-slide-up glass-card overflow-hidden group",
+        `animation-delay-${delay}`,
+        gradientClass
+      )}
+    >
+      <CardContent />
+    </div>
+  );
+};
 
 const gradientClasses = [
   "bg-gradient-to-br from-blue-50/50 to-blue-100/30 dark:from-blue-900/20 dark:to-blue-800/10",
@@ -44,17 +66,20 @@ const interests = [
   {
     icon: <Code className="h-6 w-6" />,
     title: "Coding",
-    description: "Passionate about building elegant and efficient digital solutions"
+    description: "Passionate about building elegant and efficient digital solutions",
+    linkTo: "/coding"
   },
   {
     icon: <Palette className="h-6 w-6" />,
     title: "Art & Drawing",
-    description: "Expressing creativity through various drawing and painting techniques"
+    description: "Expressing creativity through various drawing and painting techniques",
+    linkTo: "/art"
   },
   {
     icon: <Leaf className="h-6 w-6" />,
     title: "Sustainability",
-    description: "Committed to environmental causes and sustainable practices"
+    description: "Committed to environmental causes and sustainable practices",
+    linkTo: "/sustainability"
   },
   {
     icon: <Briefcase className="h-6 w-6" />,
@@ -64,12 +89,14 @@ const interests = [
   {
     icon: <Trophy className="h-6 w-6" />,
     title: "Football & FC Barcelona",
-    description: "Devoted fan of the beautiful game and Barça's artistry on the field"
+    description: "Devoted fan of the beautiful game and Barça's artistry on the field",
+    linkTo: "/football"
   },
   {
     icon: <Plane className="h-6 w-6" />,
     title: "Travel",
-    description: "Documenting journeys and cultural experiences around the globe"
+    description: "Documenting journeys and cultural experiences around the globe",
+    linkTo: "/travel"
   },
   {
     icon: <GraduationCap className="h-6 w-6" />,
@@ -118,6 +145,7 @@ const About = () => {
               description={interest.description}
               delay={(index % 4) * 100 + 300}
               gradientClass={gradientClasses[index % gradientClasses.length]}
+              linkTo={interest.linkTo}
             />
           ))}
         </div>
