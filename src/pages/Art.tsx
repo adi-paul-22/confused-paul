@@ -1,12 +1,64 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Palette } from "lucide-react";
 import { Link } from "react-router-dom";
+import ArtworkDialog from "@/components/ArtworkDialog";
+
+// Define artwork data structure
+interface Artwork {
+  id: string;
+  title: string;
+  description: string;
+  shortDescription: string;
+  color: string;
+}
 
 const Art = () => {
+  const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
+
+  // Sample artwork data
+  const artworks: Artwork[] = [
+    {
+      id: "1",
+      title: "Urban Landscape Series",
+      shortDescription: "Mixed media paintings exploring city environments and urban architecture.",
+      description: "This mixed media series explores the complex relationship between urban architecture, natural elements, and human interaction within city spaces. Each piece combines traditional painting techniques with collage, ink work, and subtle digital elements.",
+      color: "purple",
+    },
+    {
+      id: "2",
+      title: "Abstract Emotions",
+      shortDescription: "A collection of abstract paintings that explore human emotions and states of mind.",
+      description: "This collection uses color theory and abstract forms to represent different emotional states. Each piece captures a specific feeling through color relationships, brushwork techniques, and compositional elements designed to evoke particular psychological responses.",
+      color: "pink",
+    },
+    {
+      id: "3",
+      title: "Digital Illustrations",
+      shortDescription: "Contemporary digital artworks created using various software and techniques.",
+      description: "These digital illustrations push the boundaries of digital art tools while maintaining a handcrafted quality. Created using a combination of Procreate, Adobe Creative Suite, and custom digital brushes, these pieces explore narrative themes through vibrant digital rendering.",
+      color: "rose",
+    },
+  ];
+
+  // Open artwork dialog
+  const openArtworkDialog = (artwork: Artwork) => {
+    setSelectedArtwork(artwork);
+  };
+
+  // Close artwork dialog
+  const closeArtworkDialog = () => {
+    setSelectedArtwork(null);
+  };
+
+  // Get icon color for dialog
+  const getIconForColor = (color: string) => {
+    return <Palette size={28} />;
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <Navbar />
@@ -40,44 +92,29 @@ const Art = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white dark:bg-card rounded-xl shadow-lg overflow-hidden border border-border group hover:border-primary/20 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <div className="aspect-square bg-purple-50 dark:bg-purple-900/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-400/20 dark:from-purple-500/20 dark:to-pink-500/20 opacity-70"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-purple-500 dark:text-purple-400">
-                  <Palette size={64} className="opacity-20" />
+            {artworks.map((artwork, index) => {
+              const colors = ["purple", "pink", "rose"];
+              const colorClass = colors[index % colors.length];
+              
+              return (
+                <div 
+                  key={artwork.id}
+                  onClick={() => openArtworkDialog(artwork)}
+                  className="bg-white dark:bg-card rounded-xl shadow-lg overflow-hidden border border-border group hover:border-primary/20 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                >
+                  <div className={`aspect-square bg-${colorClass}-50 dark:bg-${colorClass}-900/20 relative overflow-hidden`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br from-${colorClass}-400/20 to-${colorClass}-400/20 dark:from-${colorClass}-500/20 dark:to-${colorClass}-500/20 opacity-70`}></div>
+                    <div className={`absolute inset-0 flex items-center justify-center text-${colorClass}-500 dark:text-${colorClass}-400`}>
+                      <Palette size={64} className="opacity-20" />
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">{artwork.title}</h3>
+                    <p className="text-muted-foreground text-sm">{artwork.shortDescription}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">Urban Landscape Series</h3>
-                <p className="text-muted-foreground text-sm">Mixed media paintings exploring city environments and urban architecture.</p>
-              </div>
-            </div>
-            
-            <div className="bg-white dark:bg-card rounded-xl shadow-lg overflow-hidden border border-border group hover:border-primary/20 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <div className="aspect-square bg-pink-50 dark:bg-pink-900/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-400/20 to-rose-400/20 dark:from-pink-500/20 dark:to-rose-500/20 opacity-70"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-pink-500 dark:text-pink-400">
-                  <Palette size={64} className="opacity-20" />
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">Abstract Emotions</h3>
-                <p className="text-muted-foreground text-sm">A collection of abstract paintings that explore human emotions and states of mind.</p>
-              </div>
-            </div>
-            
-            <div className="bg-white dark:bg-card rounded-xl shadow-lg overflow-hidden border border-border group hover:border-primary/20 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <div className="aspect-square bg-rose-50 dark:bg-rose-900/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-rose-400/20 to-red-400/20 dark:from-rose-500/20 dark:to-red-500/20 opacity-70"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-rose-500 dark:text-rose-400">
-                  <Palette size={64} className="opacity-20" />
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">Digital Illustrations</h3>
-                <p className="text-muted-foreground text-sm">Contemporary digital artworks created using various software and techniques.</p>
-              </div>
-            </div>
+              );
+            })}
           </div>
           
           <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-8 border border-purple-200 dark:border-purple-800">
@@ -89,6 +126,20 @@ const Art = () => {
           </div>
         </div>
       </section>
+      
+      {/* Artwork Dialog */}
+      {selectedArtwork && (
+        <ArtworkDialog
+          artwork={{
+            title: selectedArtwork.title,
+            description: selectedArtwork.description,
+            color: selectedArtwork.color,
+            icon: getIconForColor(selectedArtwork.color)
+          }}
+          isOpen={!!selectedArtwork}
+          onClose={closeArtworkDialog}
+        />
+      )}
       
       <Footer />
     </div>
