@@ -5,24 +5,27 @@ import { cn } from "@/lib/utils";
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-20 px-6 overflow-hidden">
-      {/* Gradient orbs for background effect */}
-      <div className="absolute top-20 -left-20 w-72 h-72 bg-primary/30 rounded-full filter blur-3xl opacity-60 animate-pulse dark:bg-primary/20"></div>
-      <div className="absolute bottom-20 -right-20 w-80 h-80 bg-purple-500/20 rounded-full filter blur-3xl opacity-70 animate-pulse duration-delay-1000 dark:bg-purple-600/20"></div>
+      {/* Dynamic RGB gradient orbs for background effect */}
+      <div className="absolute top-20 -left-20 w-72 h-72 bg-gradient-to-br from-pink-500/30 via-purple-500/20 to-indigo-500/30 rounded-full filter blur-3xl opacity-60 animate-pulse animation-delay-200 dark:from-pink-600/20 dark:via-purple-600/15 dark:to-indigo-600/20"></div>
+      <div className="absolute bottom-20 -right-20 w-80 h-80 bg-gradient-to-br from-blue-500/20 via-cyan-500/20 to-teal-500/20 rounded-full filter blur-3xl opacity-70 animate-pulse animation-delay-500 dark:from-blue-600/20 dark:via-cyan-600/15 dark:to-teal-600/20"></div>
+      <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-gradient-to-br from-amber-500/20 via-orange-500/20 to-red-500/20 rounded-full filter blur-3xl opacity-70 animate-pulse animation-delay-700 dark:from-amber-600/15 dark:via-orange-600/15 dark:to-red-600/15"></div>
       
       <div className="container max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="opacity-0 animate-fade-in animation-delay-100">
-              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+              <span className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary/20 to-primary/10 text-primary text-xs font-medium">
                 Portfolio
               </span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight opacity-0 animate-fade-in animation-delay-200 bg-gradient-to-r from-foreground to-foreground/80 dark:from-white dark:to-white/70 bg-clip-text">
-              Hi, I'm Paul
-              <span className="relative">
-                <span className="inline-block ml-3 text-primary animate-pulse">
-                  _
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight opacity-0 animate-fade-in animation-delay-200">
+              <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground/80 dark:from-white dark:via-white/90 dark:to-white/70 bg-clip-text text-transparent">
+                Hi, I'm Paul
+                <span className="relative">
+                  <span className="inline-block ml-3 text-primary animate-pulse">
+                    _
+                  </span>
                 </span>
               </span>
             </h1>
@@ -35,7 +38,7 @@ const Hero = () => {
             <div className="flex flex-wrap gap-4 pt-2 opacity-0 animate-fade-in animation-delay-400">
               <a
                 href="#portfolio"
-                className="px-6 py-3 rounded-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-medium transition-all hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1"
+                className="px-6 py-3 rounded-full bg-gradient-to-r from-primary via-primary/95 to-primary/90 text-primary-foreground font-medium transition-all hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1"
               >
                 View Portfolio
               </a>
@@ -49,10 +52,16 @@ const Hero = () => {
           </div>
 
           <div className="relative aspect-square rounded-2xl overflow-hidden opacity-0 animate-fade-in animation-delay-500">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent opacity-70 dark:from-primary/40"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent opacity-70 dark:from-primary/40 animate-pulse"></div>
+            
+            {/* RGB animated gradient border */}
+            <div className="absolute inset-0 p-1 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-70 animate-pulse">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/30 via-purple-500/30 to-indigo-500/30 animate-pulse"></div>
+            </div>
+            
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="rounded-full w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-md border border-white/10 flex items-center justify-center dark:from-background/30 dark:to-background/10">
-                <span className="text-3xl md:text-4xl font-display font-light bg-gradient-to-r from-foreground to-foreground/80 dark:from-white dark:to-white/70 bg-clip-text">
+                <span className="text-3xl md:text-4xl font-display font-light bg-gradient-to-r from-foreground via-foreground/90 to-foreground/80 dark:from-white dark:via-white/90 dark:to-white/70 bg-clip-text text-transparent">
                   Paul
                 </span>
               </div>

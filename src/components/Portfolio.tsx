@@ -98,17 +98,25 @@ const Portfolio = () => {
 
   return (
     <section id="portfolio" className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-background to-secondary/50 dark:from-background dark:to-background">
-      {/* Gradient accent */}
+      {/* RGB Gradient accents */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+      
+      {/* Dynamic RGB gradient background */}
+      <div className="absolute -z-10 inset-0 overflow-hidden">
+        <div className="absolute top-[10%] left-[15%] w-[50%] h-[50%] rounded-full bg-gradient-to-br from-fuchsia-500/10 via-purple-500/10 to-indigo-500/10 blur-3xl opacity-60 animate-pulse dark:from-fuchsia-500/5 dark:via-purple-500/5 dark:to-indigo-500/5"></div>
+        <div className="absolute bottom-[10%] right-[15%] w-[40%] h-[40%] rounded-full bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-indigo-500/10 blur-3xl opacity-60 animate-pulse animation-delay-500 dark:from-cyan-500/5 dark:via-blue-500/5 dark:to-indigo-500/5"></div>
+      </div>
       
       <div className="container max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-12">
           <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-4 opacity-0 animate-fade-in">
             My Work
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-fade-in animation-delay-100 bg-gradient-to-r from-foreground to-foreground/80 dark:from-white dark:to-white/70 bg-clip-text">
-            Portfolio Showcase
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-fade-in animation-delay-100">
+            <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground/80 dark:from-white dark:via-white/90 dark:to-white/70 bg-clip-text text-transparent">
+              Portfolio Showcase
+            </span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto opacity-0 animate-fade-in animation-delay-200">
             Explore my projects across different domains, reflecting my diverse
@@ -116,36 +124,43 @@ const Portfolio = () => {
           </p>
         </div>
 
-        {/* Category Filters */}
+        {/* Category Filters with RGB gradient hover effect */}
         <div className="flex flex-wrap justify-center gap-2 mb-12 opacity-0 animate-fade-in animation-delay-300">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
               className={cn(
-                "px-4 py-2 rounded-full text-sm font-medium transition-all-200 flex items-center gap-2",
+                "px-4 py-2 rounded-full text-sm font-medium transition-all-200 flex items-center gap-2 relative overflow-hidden",
                 activeCategory === category.id
-                  ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground"
+                  ? "bg-gradient-to-r from-primary via-primary/95 to-primary/90 text-primary-foreground"
                   : "bg-background border hover:bg-secondary dark:bg-secondary/20 dark:hover:bg-secondary/40"
               )}
             >
+              {/* RGB gradient hover effect */}
+              {activeCategory !== category.id && (
+                <span className="absolute inset-0 opacity-0 hover:opacity-20 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 transition-opacity duration-300"></span>
+              )}
               {category.icon}
               {category.label}
             </button>
           ))}
         </div>
 
-        {/* Portfolio Grid */}
+        {/* Portfolio Grid with enhanced RGB gradient effects */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.map((item, index) => (
             <div
               key={item.id}
               className={cn(
-                "group rounded-xl overflow-hidden border bg-card hover:shadow-xl transition-all-300 hover:-translate-y-1 opacity-0 backdrop-blur-sm",
-                "animate-slide-up bg-gradient-to-br from-card to-card/50 dark:from-card/80 dark:to-card/30",
+                "group rounded-xl overflow-hidden border bg-card hover:shadow-xl transition-all-300 hover:-translate-y-1 opacity-0 backdrop-blur-sm relative",
+                "animate-slide-up",
                 `animation-delay-${(index % 3) * 100 + 400}`
               )}
             >
+              {/* RGB gradient overlay on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 transition-opacity duration-500"></div>
+              
               <div className="relative aspect-video bg-muted overflow-hidden">
                 <img
                   src={item.image}
@@ -154,12 +169,12 @@ const Portfolio = () => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
-                  <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/20 text-primary">
+                  <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/20 text-primary backdrop-blur-sm">
                     {categories.find(cat => cat.id === item.category)?.label}
                   </span>
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-6 relative z-10">
                 <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
                   {item.title}
                 </h3>

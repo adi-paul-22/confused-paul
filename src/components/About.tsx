@@ -15,13 +15,16 @@ const InterestCard = ({ icon, title, description, delay, gradientClass }: Intere
   <div 
     className={cn(
       "p-6 rounded-xl border border-border/50 hover:border-primary/20 transition-all-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 opacity-0",
-      "animate-slide-up glass-card",
+      "animate-slide-up glass-card overflow-hidden group",
       `animation-delay-${delay}`,
       gradientClass
     )}
   >
-    <div className="mb-4 text-primary">{icon}</div>
-    <h3 className="text-lg font-semibold mb-2">{title}</h3>
+    {/* Subtle RGB gradient hover effect */}
+    <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10"></div>
+    
+    <div className="mb-4 text-primary relative z-10">{icon}</div>
+    <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{title}</h3>
     <p className="text-muted-foreground">{description}</p>
   </div>
 );
@@ -83,17 +86,22 @@ const interests = [
 const About = () => {
   return (
     <section id="about" className="py-24 px-6 relative overflow-hidden">
-      {/* Gradient background elements */}
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-70 dark:bg-primary/5"></div>
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl opacity-70 dark:bg-purple-500/5"></div>
+      {/* Dynamic RGB gradient background elements */}
+      <div className="absolute -z-10 inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-purple-500/10 rounded-full filter blur-3xl opacity-70 animate-pulse dark:from-blue-500/5 dark:via-indigo-500/5 dark:to-purple-500/5"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-cyan-500/10 rounded-full filter blur-3xl opacity-70 animate-pulse animation-delay-300 dark:from-emerald-500/5 dark:via-teal-500/5 dark:to-cyan-500/5"></div>
+        <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-gradient-to-br from-orange-500/10 via-amber-500/10 to-yellow-500/10 rounded-full filter blur-3xl opacity-60 animate-pulse animation-delay-600 dark:from-orange-500/5 dark:via-amber-500/5 dark:to-yellow-500/5"></div>
+      </div>
       
       <div className="container max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-4 opacity-0 animate-fade-in">
             About Me
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-fade-in animation-delay-100 bg-gradient-to-r from-foreground to-foreground/80 dark:from-white dark:to-white/70 bg-clip-text">
-            My Diverse Interests
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-fade-in animation-delay-100">
+            <span className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground/80 dark:from-white dark:via-white/90 dark:to-white/70 bg-clip-text text-transparent">
+              My Diverse Interests
+            </span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto opacity-0 animate-fade-in animation-delay-200">
             I'm a multi-disciplinary enthusiast with a passion for exploring the 

@@ -144,10 +144,72 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
   }
   
   .bg-blur {
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
+  }
+  
+  /* RGB Gradient Animations */
+  .rgb-text-gradient {
+    @apply bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent;
+    background-size: 200% 200%;
+    animation: rgb-text-animation 5s ease infinite;
+  }
+  
+  .rgb-border-gradient {
+    position: relative;
+  }
+  
+  .rgb-border-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(to right, 
+      theme('colors.pink.500'), 
+      theme('colors.purple.500'), 
+      theme('colors.indigo.500'), 
+      theme('colors.blue.500'),
+      theme('colors.cyan.500'),
+      theme('colors.emerald.500'),
+      theme('colors.amber.500'),
+      theme('colors.red.500'),
+      theme('colors.pink.500')
+    );
+    background-size: 400% 400%;
+    animation: rgb-border-animation 10s ease infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+  }
+  
+  @keyframes rgb-text-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @keyframes rgb-border-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 }
