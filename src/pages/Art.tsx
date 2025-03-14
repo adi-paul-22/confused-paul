@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,11 @@ interface Artwork {
 
 const Art = () => {
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Sample artwork data
   const artworks: Artwork[] = [
