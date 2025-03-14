@@ -7,7 +7,7 @@ import { type CodingProject } from "./CodingPortfolioGenerator";
 
 interface ProjectCardProps {
   project: CodingProject;
-  onDelete: ((id: string) => void) | null; // Make onDelete optional to support read-only mode
+  onDelete: (id: string) => void;
 }
 
 const ProjectCard = ({ project, onDelete }: ProjectCardProps) => {
@@ -26,16 +26,14 @@ const ProjectCard = ({ project, onDelete }: ProjectCardProps) => {
             {project.title}
           </h3>
         </div>
-        {onDelete && (
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="h-8 w-8 text-muted-foreground hover:text-destructive"
-            onClick={() => onDelete(project.id)}
-          >
-            <Trash size={16} />
-          </Button>
-        )}
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-8 w-8 text-muted-foreground hover:text-destructive"
+          onClick={() => onDelete(project.id)}
+        >
+          <Trash size={16} />
+        </Button>
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-muted-foreground text-sm">{project.description}</p>
