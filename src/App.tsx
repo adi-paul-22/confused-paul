@@ -8,12 +8,15 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "./components/ThemeProvider";
 
-// Import our new page components
+// Import our page components
 import Coding from "./pages/Coding";
 import Art from "./pages/Art";
 import Sustainability from "./pages/Sustainability";
 import Football from "./pages/Football";
 import Travel from "./pages/Travel";
+import MbaPrep from "./pages/MbaPrep";
+import Startup from "./pages/Startup";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -27,12 +30,17 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             
-            {/* New landing pages for each category */}
+            {/* Category landing pages */}
             <Route path="/coding" element={<Coding />} />
             <Route path="/art" element={<Art />} />
             <Route path="/sustainability" element={<Sustainability />} />
             <Route path="/football" element={<Football />} />
             <Route path="/travel" element={<Travel />} />
+            <Route path="/mba-prep" element={<MbaPrep />} />
+            <Route path="/startup" element={<Startup />} />
+            
+            {/* Admin page */}
+            <Route path="/admin" element={<Admin />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
