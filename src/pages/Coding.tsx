@@ -1,12 +1,18 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Code } from "lucide-react";
 import { Link } from "react-router-dom";
+import CodingPortfolioGenerator from "@/components/CodingPortfolioGenerator";
 
 const Coding = () => {
+  // Reset scroll position when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <Navbar />
@@ -39,44 +45,9 @@ const Coding = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-white dark:bg-card rounded-xl shadow-lg overflow-hidden border border-border group hover:border-primary/20 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <div className="h-56 bg-blue-50 dark:bg-blue-900/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 dark:from-blue-500/20 dark:to-indigo-500/20 opacity-70"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-blue-500 dark:text-blue-400">
-                  <Code size={64} className="opacity-20" />
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-semibold text-xl mb-2 group-hover:text-primary transition-colors">E-commerce Platform</h3>
-                <p className="text-muted-foreground mb-4">A fully responsive e-commerce solution with modern UX, built with React, Next.js, and TypeScript.</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium dark:bg-blue-900/30 dark:text-blue-400">React</span>
-                  <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium dark:bg-blue-900/30 dark:text-blue-400">Next.js</span>
-                  <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium dark:bg-blue-900/30 dark:text-blue-400">TypeScript</span>
-                </div>
-                <Button variant="outline" className="w-full">View Project</Button>
-              </div>
-            </div>
-            
-            <div className="bg-white dark:bg-card rounded-xl shadow-lg overflow-hidden border border-border group hover:border-primary/20 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <div className="h-56 bg-indigo-50 dark:bg-indigo-900/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 dark:from-indigo-500/20 dark:to-purple-500/20 opacity-70"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-indigo-500 dark:text-indigo-400">
-                  <Code size={64} className="opacity-20" />
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-semibold text-xl mb-2 group-hover:text-primary transition-colors">Portfolio Generator</h3>
-                <p className="text-muted-foreground mb-4">A tool for developers to create stunning portfolios with minimal effort using modern web technologies.</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-2 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-medium dark:bg-indigo-900/30 dark:text-indigo-400">Vue.js</span>
-                  <span className="px-2 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-medium dark:bg-indigo-900/30 dark:text-indigo-400">Tailwind</span>
-                  <span className="px-2 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-medium dark:bg-indigo-900/30 dark:text-indigo-400">JavaScript</span>
-                </div>
-                <Button variant="outline" className="w-full">View Project</Button>
-              </div>
-            </div>
+          {/* Portfolio Generator Section */}
+          <div className="mb-12">
+            <CodingPortfolioGenerator />
           </div>
           
           <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800">
