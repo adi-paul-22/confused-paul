@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,8 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import ProjectCard from "@/components/ProjectCard";
-import { type CodingProject } from "@/components/CodingPortfolioGenerator";
+import ProjectCard, { type CodingProject } from "@/components/ProjectCard";
 import {
   Table,
   TableBody,
@@ -30,7 +28,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-// Define the schema for coding projects - must match CodingProject type
 const formSchema = z.object({
   title: z.string().min(2, {
     message: "Title must be at least 2 characters.",
@@ -55,7 +52,6 @@ const Admin = () => {
   const [projects, setProjects] = useState<CodingProject[]>([]);
   const navigate = useNavigate();
 
-  // Form setup
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -67,7 +63,6 @@ const Admin = () => {
     },
   });
 
-  // Load projects from localStorage
   useEffect(() => {
     const savedProjects = localStorage.getItem("codingProjects");
     if (savedProjects) {
@@ -75,7 +70,6 @@ const Admin = () => {
     }
   }, []);
 
-  // Save projects to localStorage
   useEffect(() => {
     if (isAuthenticated) {
       localStorage.setItem("codingProjects", JSON.stringify(projects));
@@ -83,7 +77,6 @@ const Admin = () => {
   }, [projects, isAuthenticated]);
 
   const handleLogin = () => {
-    // Simple password check - in a real app use proper authentication
     if (password === "admin123") {
       setIsAuthenticated(true);
       toast.success("Logged in successfully");
@@ -97,9 +90,7 @@ const Admin = () => {
     navigate("/");
   };
 
-  // Handle form submission
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Fix: Ensure all required properties are provided
     const newProject: CodingProject = {
       id: crypto.randomUUID(),
       createdAt: new Date().toISOString(),
@@ -115,7 +106,6 @@ const Admin = () => {
     toast.success("Project added successfully!");
   };
 
-  // Delete a project
   const deleteProject = (id: string) => {
     setProjects((prev) => prev.filter((project) => project.id !== id));
     toast.success("Project deleted successfully!");
@@ -286,7 +276,6 @@ const Admin = () => {
   );
 };
 
-// Helper component for the login form
 const Label = ({ htmlFor, children }) => (
   <label
     htmlFor={htmlFor}
