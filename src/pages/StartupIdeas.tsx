@@ -1,14 +1,15 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Lightbulb, Upload, FileText, Trash, Download, Image, Save, Tags } from "lucide-react";
+import { Lightbulb, Upload, FileText, Trash, Download, Image, Save, Tags, Lock } from "lucide-react";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useNavigate } from "react-router-dom";
 
 interface StartupIdea {
   id: string;
@@ -23,6 +24,8 @@ interface StartupIdea {
 }
 
 const StartupIdeas = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
   const [ideas, setIdeas] = useState<StartupIdea[]>(() => {
     const savedIdeas = localStorage.getItem("startupIdeas");
     return savedIdeas ? JSON.parse(savedIdeas) : [];
@@ -37,6 +40,25 @@ const StartupIdeas = () => {
   const [tags, setTags] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isImporting, setIsImporting] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("startupIdeas", JSON.stringify(ideas));
+  }, [ideas]);
+
+  const handleLogin = () => {
+    if (password === "admin123") {
+      setIsAuthenticated(true);
+      toast.success("Logged in successfully");
+    } else {
+      toast.error("Invalid password");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    navigate("/");
+  };
 
   const handleSaveIdea = () => {
     if (!title || !description) {
@@ -58,7 +80,6 @@ const StartupIdeas = () => {
     
     const updatedIdeas = [newIdea, ...ideas];
     setIdeas(updatedIdeas);
-    localStorage.setItem("startupIdeas", JSON.stringify(updatedIdeas));
     
     // Reset form
     setTitle("");
@@ -75,7 +96,6 @@ const StartupIdeas = () => {
   const handleDeleteIdea = (id: string) => {
     const updatedIdeas = ideas.filter(idea => idea.id !== id);
     setIdeas(updatedIdeas);
-    localStorage.setItem("startupIdeas", JSON.stringify(updatedIdeas));
     toast.success("Startup idea deleted successfully!");
   };
 
@@ -114,16 +134,131 @@ const StartupIdeas = () => {
     }
   };
 
+  // If not authenticated, show login form for admin access
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20">
+        <Navbar />
+        
+        <main className="flex-grow container max-w-6xl mx-auto px-4 py-20">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold mb-4">Startup Ideas</h1>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Explore innovative business concepts.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+            {/* Display all ideas for visitors */}
+            <div className="space-y-6">
+              <Card className="border border-amber-200 dark:border-amber-800">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Lightbulb size={18} />
+                    Startup Ideas
+                  </CardTitle>
+                  <CardDescription>Innovative business concepts</CardDescription>
+                </CardHeader>
+                <CardContent className="max-h-[600px] overflow-y-auto space-y-4">
+                  {ideas.length > 0 ? (
+                    ideas.map((idea) => (
+                      <Card key={idea.id} className="p-4 hover:bg-amber-50/50 dark:hover:bg-amber-900/10 transition-colors">
+                        <div>
+                          <h3 className="font-medium">{idea.title}</h3>
+                          <div className="flex flex-wrap gap-1 my-1">
+                            {idea.tags.map((tag, index) => (
+                              <span 
+                                key={index}
+                                className="bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full text-xs"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {idea.description}
+                          </p>
+                          {idea.problemStatement && (
+                            <div className="mt-2">
+                              <p className="text-xs font-medium text-amber-700 dark:text-amber-400">Problem:</p>
+                              <p className="text-sm text-muted-foreground">{idea.problemStatement}</p>
+                            </div>
+                          )}
+                          {idea.solution && (
+                            <div className="mt-2">
+                              <p className="text-xs font-medium text-amber-700 dark:text-amber-400">Solution:</p>
+                              <p className="text-sm text-muted-foreground">{idea.solution}</p>
+                            </div>
+                          )}
+                          {idea.marketSize && (
+                            <p className="text-xs text-muted-foreground mt-2">Market Size: {idea.marketSize}</p>
+                          )}
+                          {idea.competitors && (
+                            <p className="text-xs text-muted-foreground">Competitors: {idea.competitors}</p>
+                          )}
+                        </div>
+                      </Card>
+                    ))
+                  ) : (
+                    <div className="text-center py-8">
+                      <Lightbulb className="mx-auto h-12 w-12 text-muted-foreground/30 mb-3" />
+                      <p className="text-muted-foreground">No startup ideas yet.</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+            
+            {/* Admin Login Form */}
+            <div className="mt-8">
+              <Card className="w-full max-w-md mx-auto border border-amber-200 dark:border-amber-800">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Lock size={18} />
+                    Admin Login
+                  </CardTitle>
+                  <CardDescription>Login to add and manage startup ideas</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="password">Password</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter admin password"
+                        className="w-full"
+                      />
+                    </div>
+                    <Button 
+                      onClick={handleLogin} 
+                      className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600"
+                    >
+                      Login
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </main>
+        
+        <Footer />
+      </div>
+    );
+  }
+
+  // Admin view with form to add ideas
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20">
       <Navbar />
       
       <main className="flex-grow container max-w-6xl mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Startup Ideas</h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Capture and develop your innovative business concepts in one organized workspace.
-          </p>
+        <div className="flex justify-between items-center mb-12">
+          <h1 className="text-4xl font-bold">Startup Ideas Admin</h1>
+          <Button variant="outline" onClick={handleLogout}>Logout</Button>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
