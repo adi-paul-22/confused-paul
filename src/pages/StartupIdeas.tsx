@@ -1,15 +1,14 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Lightbulb, Upload, FileText, Trash, Download, Image, Save, Tags, Lock } from "lucide-react";
+import { Lightbulb, Upload, FileText, Trash, Download, Image, Save, Tags, Lock, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 interface StartupIdea {
   id: string;
@@ -41,6 +40,10 @@ const StartupIdeas = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isImporting, setIsImporting] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("startupIdeas", JSON.stringify(ideas));
@@ -141,6 +144,11 @@ const StartupIdeas = () => {
         <Navbar />
         
         <main className="flex-grow container max-w-6xl mx-auto px-4 py-20">
+          <Link to="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8">
+            <ArrowLeft size={16} />
+            <span>Back to Home</span>
+          </Link>
+          
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Startup Ideas</h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -257,7 +265,13 @@ const StartupIdeas = () => {
       
       <main className="flex-grow container max-w-6xl mx-auto px-4 py-20">
         <div className="flex justify-between items-center mb-12">
-          <h1 className="text-4xl font-bold">Startup Ideas Admin</h1>
+          <div className="flex items-center">
+            <Link to="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+              <ArrowLeft size={16} />
+              <span>Back to Home</span>
+            </Link>
+            <h1 className="text-4xl font-bold ml-8">Startup Ideas Admin</h1>
+          </div>
           <Button variant="outline" onClick={handleLogout}>Logout</Button>
         </div>
         

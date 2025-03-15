@@ -1,17 +1,37 @@
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Code } from "lucide-react";
+import { ArrowLeft, Code, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import CodingPortfolioGenerator from "@/components/CodingPortfolioGenerator";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 const Coding = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+
   // Reset scroll position when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleLogin = () => {
+    if (password === "admin123") {
+      setIsAuthenticated(true);
+      toast.success("Logged in successfully");
+    } else {
+      toast.error("Invalid password");
+    }
+  };
+
+  const handleGoToAdmin = () => {
+    window.location.href = "/admin";
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
@@ -43,6 +63,61 @@ const Coding = () => {
               Here you'll find a collection of my projects spanning web development, 
               mobile applications, and various programming experiments.
             </p>
+          </div>
+          
+          {/* Admin Login/Access Section */}
+          <div className="mb-8">
+            {!isAuthenticated ? (
+              <Card className="border border-blue-200 dark:border-blue-800 mb-8">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Lock size={18} />
+                    Admin Access
+                  </CardTitle>
+                  <CardDescription>Login to manage coding projects</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex-grow">
+                      <Label htmlFor="password">Password</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter admin password"
+                        className="w-full"
+                      />
+                    </div>
+                    <div className="flex items-end">
+                      <Button 
+                        onClick={handleLogin} 
+                        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                      >
+                        Login
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="border border-blue-200 dark:border-blue-800 mb-8 bg-blue-50 dark:bg-blue-900/10">
+                <CardContent className="pt-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-semibold mb-1">Admin Access Granted</h3>
+                      <p className="text-muted-foreground">You can now manage coding projects</p>
+                    </div>
+                    <Button 
+                      onClick={handleGoToAdmin}
+                      className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                    >
+                      Go to Admin Dashboard
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
           
           {/* Portfolio Generator Section */}
