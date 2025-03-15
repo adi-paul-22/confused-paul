@@ -14,6 +14,9 @@ import Art from "./pages/Art";
 import Sustainability from "./pages/Sustainability";
 import Football from "./pages/Football";
 import Travel from "./pages/Travel";
+import Admin from "./pages/Admin";
+import MbaPrep from "./pages/MbaPrep";
+import StartupIdeas from "./pages/StartupIdeas";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,9 @@ const App = () => (
             <Route path="/sustainability" element={<Sustainability />} />
             <Route path="/football" element={<Football />} />
             <Route path="/travel" element={<Travel />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/mba-prep" element={<MbaPrep />} />
+            <Route path="/startup-ideas" element={<StartupIdeas />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

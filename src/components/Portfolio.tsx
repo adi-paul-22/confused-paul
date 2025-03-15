@@ -27,8 +27,8 @@ const categories: Category[] = [
   { id: "consulting", label: "Consulting", icon: <Briefcase className="h-4 w-4" /> },
   { id: "football", label: "Football", icon: <Trophy className="h-4 w-4" />, path: "/football" },
   { id: "travel", label: "Travel", icon: <Plane className="h-4 w-4" />, path: "/travel" },
-  { id: "mba", label: "MBA Prep", icon: <GraduationCap className="h-4 w-4" /> },
-  { id: "startup", label: "Startups", icon: <Lightbulb className="h-4 w-4" /> },
+  { id: "mba", label: "MBA Prep", icon: <GraduationCap className="h-4 w-4" />, path: "/mba-prep" },
+  { id: "startup", label: "Startups", icon: <Lightbulb className="h-4 w-4" />, path: "/startup-ideas" },
 ];
 
 // Sample portfolio items (placeholder data)

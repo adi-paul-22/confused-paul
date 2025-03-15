@@ -3,14 +3,24 @@ import React from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Code, Github, Link as LinkIcon, Trash } from "lucide-react";
-import { type CodingProject } from "./CodingPortfolioGenerator";
+
+export type CodingProject = {
+  id: string;
+  createdAt: string;
+  title: string;
+  description: string;
+  technologies: string;
+  githubUrl: string;
+  liveUrl: string;
+};
 
 interface ProjectCardProps {
   project: CodingProject;
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
+  readOnly?: boolean;
 }
 
-const ProjectCard = ({ project, onDelete }: ProjectCardProps) => {
+const ProjectCard = ({ project, onDelete, readOnly = false }: ProjectCardProps) => {
   // Split the technologies string into an array
   const technologies = project.technologies.split(",").map(tech => tech.trim());
 
@@ -26,14 +36,16 @@ const ProjectCard = ({ project, onDelete }: ProjectCardProps) => {
             {project.title}
           </h3>
         </div>
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="h-8 w-8 text-muted-foreground hover:text-destructive"
-          onClick={() => onDelete(project.id)}
-        >
-          <Trash size={16} />
-        </Button>
+        {!readOnly && onDelete && (
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="h-8 w-8 text-muted-foreground hover:text-destructive"
+            onClick={() => onDelete(project.id)}
+          >
+            <Trash size={16} />
+          </Button>
+        )}
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-muted-foreground text-sm">{project.description}</p>

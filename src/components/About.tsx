@@ -101,12 +101,14 @@ const interests = [
   {
     icon: <GraduationCap className="h-6 w-6" />,
     title: "MBA Preparation",
-    description: "Pursuing advanced business education and sharing insights along the way"
+    description: "Pursuing advanced business education and sharing insights along the way",
+    linkTo: "/mba-prep"
   },
   {
     icon: <Lightbulb className="h-6 w-6" />,
     title: "Startup Ideas",
-    description: "Constantly ideating and exploring innovative business concepts"
+    description: "Constantly ideating and exploring innovative business concepts",
+    linkTo: "/startup-ideas"
   }
 ];
 
