@@ -52,7 +52,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="relative aspect-square rounded-2xl overflow-hidden opacity-0 animate-fade-in animation-delay-500">
+          <div className="relative aspect-square rounded-2xl overflow-hidden opacity-0 animate-fade-in animation-delay-500 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent opacity-70 dark:from-primary/40 animate-pulse"></div>
             
             {/* RGB animated gradient border */}
@@ -66,20 +66,15 @@ const Hero = () => {
                 <div className="relative w-full h-full rounded-full overflow-hidden transform hover:scale-105 transition-transform duration-300 shadow-xl">
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-400/20 to-purple-500/20 mix-blend-overlay"></div>
                   <Avatar className="w-full h-full border-4 border-white/20">
-                    <AvatarImage src="/lovable-uploads/e9f4e256-9b93-4e78-82e4-9ff33563b30d.png" alt="Paul's 3D Avatar" className="object-cover" />
-                    <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-blue-500 to-purple-600 text-white">
-                      <div className="flex flex-col items-center justify-center">
-                        <span className="text-lg mb-1">3D</span>
-                        <span>Paul</span>
-                      </div>
+                    <AvatarImage 
+                      src="/lovable-uploads/e9f4e256-9b93-4e78-82e4-9ff33563b30d.png" 
+                      alt="Paul's 3D Avatar" 
+                      className="object-cover" 
+                    />
+                    <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-blue-500 to-purple-600 text-transparent">
+                      {/* Empty fallback to prevent text from showing */}
                     </AvatarFallback>
                   </Avatar>
-                  
-                  {/* Glasses effect overlay */}
-                  <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-3/4 h-8 border-2 border-white/30 rounded-full pointer-events-none"></div>
-                  
-                  {/* Stubble beard effect */}
-                  <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 w-1/2 h-12 bg-gradient-to-b from-transparent to-gray-700/20 rounded-b-full pointer-events-none"></div>
                   
                   {/* Waving hand animation */}
                   <div className="absolute bottom-5 -right-2 w-16 h-16 z-20 pointer-events-none">
