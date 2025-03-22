@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,6 +10,12 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  // Preload the avatar image
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/paul-avatar.png";
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <Navbar />

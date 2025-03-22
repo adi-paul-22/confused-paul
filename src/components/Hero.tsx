@@ -1,6 +1,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const Hero = () => {
   return (
@@ -60,10 +61,26 @@ const Hero = () => {
             </div>
             
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="rounded-full w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-md border border-white/10 flex items-center justify-center dark:from-background/30 dark:to-background/10">
-                <span className="text-3xl md:text-4xl font-display font-light bg-gradient-to-r from-foreground via-foreground/90 to-foreground/80 dark:from-white dark:via-white/90 dark:to-white/70 bg-clip-text text-transparent">
-                  Paul
-                </span>
+              <div className="rounded-full w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-md border border-white/10 flex items-center justify-center p-3 dark:from-background/30 dark:to-background/10">
+                {/* 3D Avatar with glasses and stubble beard instead of text */}
+                <div className="relative w-full h-full rounded-full overflow-hidden transform hover:scale-105 transition-transform duration-300 shadow-xl">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-400/20 to-purple-500/20 mix-blend-overlay"></div>
+                  <Avatar className="w-full h-full border-4 border-white/20">
+                    <AvatarImage src="/paul-avatar.png" alt="Paul's 3D Avatar" className="object-cover" />
+                    <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+                      <div className="flex flex-col items-center justify-center">
+                        <span className="text-lg mb-1">3D</span>
+                        <span>Paul</span>
+                      </div>
+                    </AvatarFallback>
+                  </Avatar>
+                  
+                  {/* Glasses effect overlay */}
+                  <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-3/4 h-8 border-2 border-white/30 rounded-full pointer-events-none"></div>
+                  
+                  {/* Stubble beard effect */}
+                  <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 w-1/2 h-12 bg-gradient-to-b from-transparent to-gray-700/20 rounded-b-full pointer-events-none"></div>
+                </div>
               </div>
             </div>
           </div>
