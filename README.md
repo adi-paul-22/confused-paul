@@ -1,9 +1,8 @@
-
-# Welcome to The Confused Paul Portfolio
+# Welcome to your Lovable project
 
 ## Project info
 
-**URL**: https://theconfusedpaul.in
+**URL**: https://lovable.dev/projects/1f1c4316-727e-4ddb-a9f3-d2eb284d4188
 
 ## How can I edit this code?
 
@@ -37,9 +36,23 @@ npm i
 npm run dev
 ```
 
+**Edit a file directly in GitHub**
+
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
+
+**Use GitHub Codespaces**
+
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
 ## What technologies are used for this project?
 
-This project is built with:
+This project is built with .
 
 - Vite
 - TypeScript
@@ -47,38 +60,10 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How to deploy this project to your custom domain (theconfusedpaul.in)
+## How can I deploy this project?
 
-### Build the project
-```sh
-npm run build
-```
+Simply open [Lovable](https://lovable.dev/projects/1f1c4316-727e-4ddb-a9f3-d2eb284d4188) and click on Share -> Publish.
 
-This will create a `dist` directory with your built project.
+## I want to use a custom domain - is that possible?
 
-### Deployment Options
-
-#### Option 1: Netlify
-
-1. Sign up for a Netlify account
-2. Connect your repository
-3. Configure your build settings:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-4. Set up your custom domain (theconfusedpaul.in) in the Netlify dashboard
-5. Configure your DNS settings to point to Netlify
-
-#### Option 2: Vercel
-
-1. Sign up for a Vercel account
-2. Import your repository
-3. Vercel will automatically detect Vite and set up build settings
-4. Add your custom domain (theconfusedpaul.in) in the Vercel dashboard
-5. Configure your DNS settings to point to Vercel
-
-#### Option 3: Traditional Web Hosting
-
-1. Build your project locally with `npm run build`
-2. Upload the contents of the `dist` directory to your web hosting server
-3. Configure your DNS settings to point to your hosting provider
-4. Ensure your server is configured to serve a Single Page Application correctly (redirecting 404s to index.html)
+We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
