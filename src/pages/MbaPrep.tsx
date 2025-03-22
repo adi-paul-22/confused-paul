@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Upload, BookOpen, FileText, Clock, Download, Image, Save, ArrowLeft } from "lucide-react";
+import { Upload, BookOpen, FileText, Clock, Download, Image, Save, ArrowLeft, Lock } from "lucide-react";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -168,7 +169,10 @@ const MbaPrep = () => {
             <div className="mt-8">
               <Card className="w-full max-w-md mx-auto border border-blue-200 dark:border-blue-800">
                 <CardHeader>
-                  <CardTitle>Admin Login</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Lock size={18} />
+                    Admin Login
+                  </CardTitle>
                   <CardDescription>Login to add and manage MBA notes</CardDescription>
                 </CardHeader>
                 <CardContent>
