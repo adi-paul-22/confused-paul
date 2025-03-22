@@ -62,11 +62,11 @@ const Hero = () => {
             
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="rounded-full w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-md border border-white/10 flex items-center justify-center p-3 dark:from-background/30 dark:to-background/10">
-                {/* 3D Avatar with glasses and stubble beard instead of text */}
+                {/* 3D Avatar with waving animation */}
                 <div className="relative w-full h-full rounded-full overflow-hidden transform hover:scale-105 transition-transform duration-300 shadow-xl">
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-400/20 to-purple-500/20 mix-blend-overlay"></div>
                   <Avatar className="w-full h-full border-4 border-white/20">
-                    <AvatarImage src="/paul-avatar.png" alt="Paul's 3D Avatar" className="object-cover" />
+                    <AvatarImage src="/lovable-uploads/e9f4e256-9b93-4e78-82e4-9ff33563b30d.png" alt="Paul's 3D Avatar" className="object-cover" />
                     <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-blue-500 to-purple-600 text-white">
                       <div className="flex flex-col items-center justify-center">
                         <span className="text-lg mb-1">3D</span>
@@ -80,6 +80,19 @@ const Hero = () => {
                   
                   {/* Stubble beard effect */}
                   <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 w-1/2 h-12 bg-gradient-to-b from-transparent to-gray-700/20 rounded-b-full pointer-events-none"></div>
+                  
+                  {/* Waving hand animation */}
+                  <div className="absolute bottom-5 -right-2 w-16 h-16 z-20 pointer-events-none">
+                    <div className="w-10 h-10 bg-skin-tone rounded-full relative animate-wave-hand">
+                      {/* Fingers */}
+                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-3/4 w-1.5 h-4 bg-skin-tone rounded-full"></div>
+                      <div className="absolute top-0 left-1/4 transform -translate-x-1/2 -translate-y-3/4 w-1.5 h-3.5 bg-skin-tone rounded-full"></div>
+                      <div className="absolute top-0 right-1/4 transform translate-x-1/2 -translate-y-3/4 w-1.5 h-4 bg-skin-tone rounded-full"></div>
+                      <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-2/3 w-1.5 h-3 bg-skin-tone rounded-full"></div>
+                      {/* Wrist */}
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/4 w-6 h-5 bg-skin-tone rounded-lg"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

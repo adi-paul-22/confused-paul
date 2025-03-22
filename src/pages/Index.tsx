@@ -13,7 +13,7 @@ const Index = () => {
   // Preload the avatar image
   useEffect(() => {
     const img = new Image();
-    img.src = "/paul-avatar.png";
+    img.src = "/lovable-uploads/e9f4e256-9b93-4e78-82e4-9ff33563b30d.png";
   }, []);
 
   return (
