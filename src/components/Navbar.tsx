@@ -37,9 +37,9 @@ const Navbar = () => {
             href="#"
             className="text-xl font-display font-bold tracking-tight z-10"
           >
-            Confused Paul
+            confused paul
             <span className="text-primary">.</span>
-            <span className="text-muted-foreground">com</span>
+            <span className="text-muted-foreground">in</span>
           </a>
 
           {/* Desktop Navigation */}

@@ -11,8 +11,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div className="space-y-4">
             <h3 className="text-xl font-display font-bold tracking-tight">
-              Confused Paul<span className="text-primary">.</span>
-              <span className="text-muted-foreground">com</span>
+              confused paul<span className="text-primary">.</span>
+              <span className="text-muted-foreground">in</span>
             </h3>
             <p className="text-muted-foreground">
               A portfolio showcasing my journey through technology, 
@@ -98,7 +98,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm mb-4 sm:mb-0">
-              © {currentYear} Confused Paul. All rights reserved.
+              © {currentYear} confused paul.in. All rights reserved.
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">
