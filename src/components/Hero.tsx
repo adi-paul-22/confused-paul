@@ -1,4 +1,3 @@
-
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -52,20 +51,12 @@ const Hero = () => {
           </div>
 
           <div className="relative aspect-square rounded-2xl overflow-hidden opacity-0 animate-fade-in animation-delay-500">
+            <img 
+              src="/lovable-uploads/5199dc81-0b01-4e77-9bdd-128326d5b910.png" 
+              alt="Paul's Portrait" 
+              className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+            />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent opacity-70 dark:from-primary/40 animate-pulse"></div>
-            
-            {/* RGB animated gradient border */}
-            <div className="absolute inset-0 p-1 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-70 animate-pulse">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/30 via-purple-500/30 to-indigo-500/30 animate-pulse"></div>
-            </div>
-            
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="rounded-full w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-md border border-white/10 flex items-center justify-center dark:from-background/30 dark:to-background/10">
-                <span className="text-3xl md:text-4xl font-display font-light bg-gradient-to-r from-foreground via-foreground/90 to-foreground/80 dark:from-white dark:via-white/90 dark:to-white/70 bg-clip-text text-transparent">
-                  Paul
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
