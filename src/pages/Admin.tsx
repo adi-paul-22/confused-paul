@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -264,7 +263,7 @@ const Admin = () => {
               <ProjectCard 
                 key={project.id} 
                 project={project} 
-                // Fix: Make sure we're passing the id parameter to deleteProject
+                readOnly={false}
                 onDelete={() => deleteProject(project.id)}
               />
             ))}

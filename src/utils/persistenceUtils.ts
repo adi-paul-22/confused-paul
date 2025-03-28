@@ -1,14 +1,20 @@
 
 /**
  * Utility functions for persisting data across the application
+ * 
+ * NOTE: This currently uses localStorage which is device-specific.
+ * For truly global persistence accessible from anywhere, 
+ * a backend database solution like Supabase is recommended.
  */
 
 /**
  * Saves data to localStorage with the specified key
+ * This is a temporary solution until a proper backend is integrated
  */
 export const saveData = <T,>(key: string, data: T): void => {
   try {
     localStorage.setItem(key, JSON.stringify(data));
+    console.log(`Data saved locally for key ${key}. Note: This is only accessible on this device.`);
   } catch (error) {
     console.error(`Failed to save data for key ${key}:`, error);
   }
@@ -16,6 +22,7 @@ export const saveData = <T,>(key: string, data: T): void => {
 
 /**
  * Loads data from localStorage for the specified key
+ * This is a temporary solution until a proper backend is integrated
  * @returns The parsed data or fallback if not found/invalid
  */
 export const loadData = <T,>(key: string, fallback: T): T => {
@@ -31,6 +38,8 @@ export const loadData = <T,>(key: string, fallback: T): T => {
 
 /**
  * Custom hook for persistent state using localStorage
+ * Note: This provides device-local persistence only.
+ * For global persistence, a backend database is required.
  */
 import { useState, useEffect } from 'react';
 
