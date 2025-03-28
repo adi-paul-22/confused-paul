@@ -93,13 +93,12 @@ const Admin = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const newProject: CodingProject = {
       id: crypto.randomUUID(),
-      createdAt: new Date().toISOString(),
       title: values.title,
       description: values.description,
       // Fix: Convert string to string[] for technologies
       technologies: values.technologies.split(',').map(tech => tech.trim()).filter(Boolean),
       githubUrl: values.githubUrl || "",
-      liveUrl: values.liveUrl || "",
+      projectUrl: values.liveUrl || "", // Using projectUrl from the interface
     };
 
     setProjects((prev) => [newProject, ...prev]);
