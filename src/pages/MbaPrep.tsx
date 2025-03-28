@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -10,6 +9,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { usePersistentState } from "@/utils/persistenceUtils";
 
 interface MbaNote {
   id: string;
@@ -22,10 +22,7 @@ interface MbaNote {
 const MbaPrep = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [notes, setNotes] = useState<MbaNote[]>(() => {
-    const savedNotes = localStorage.getItem("mbaNotes");
-    return savedNotes ? JSON.parse(savedNotes) : [];
-  });
+  const [notes, setNotes] = usePersistentState<MbaNote[]>("mbaNotes", []);
   
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -64,9 +61,7 @@ const MbaPrep = () => {
       date: new Date().toISOString(),
     };
     
-    const updatedNotes = [newNote, ...notes];
-    setNotes(updatedNotes);
-    localStorage.setItem("mbaNotes", JSON.stringify(updatedNotes));
+    setNotes([newNote, ...notes]);
     
     setTitle("");
     setContent("");

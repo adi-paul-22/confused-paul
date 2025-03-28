@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { usePersistentState } from "@/utils/persistenceUtils";
 
 interface TravelDestination {
   id: string;
@@ -24,10 +24,7 @@ interface TravelDestination {
 const Travel = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [destinations, setDestinations] = useState<TravelDestination[]>(() => {
-    const savedDestinations = localStorage.getItem("travelDestinations");
-    return savedDestinations ? JSON.parse(savedDestinations) : [];
-  });
+  const [destinations, setDestinations] = usePersistentState<TravelDestination[]>("travelDestinations", []);
   
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -37,14 +34,9 @@ const Travel = () => {
   const [tips, setTips] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
-  // Reset scroll position when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("travelDestinations", JSON.stringify(destinations));
-  }, [destinations]);
 
   const handleLogin = () => {
     if (password === "admin123") {
@@ -77,7 +69,6 @@ const Travel = () => {
     
     setDestinations([newDestination, ...destinations]);
     
-    // Reset form
     setTitle("");
     setLocation("");
     setDescription("");

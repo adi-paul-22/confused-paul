@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { MonitorSmartphone, Lock, Code, Tags, Plus, Trash, Save } from "lucide-react";
 import { type CodingProject } from "./ProjectCard";
@@ -9,9 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { usePersistentState } from "@/utils/persistenceUtils";
 
 const CodingPortfolioGenerator = () => {
-  const [projects, setProjects] = useState<CodingProject[]>([]);
+  const [projects, setProjects] = usePersistentState<CodingProject[]>("codingProjects", []);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [isAdding, setIsAdding] = useState(false);
@@ -23,14 +23,6 @@ const CodingPortfolioGenerator = () => {
   const [githubUrl, setGithubUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("placeholder.svg");
   const [technologies, setTechnologies] = useState("");
-
-  // Load projects from localStorage on component mount
-  useEffect(() => {
-    const savedProjects = localStorage.getItem("codingProjects");
-    if (savedProjects) {
-      setProjects(JSON.parse(savedProjects));
-    }
-  }, []);
 
   const handleLogin = () => {
     if (password === "admin123") {
@@ -61,11 +53,8 @@ const CodingPortfolioGenerator = () => {
       technologies: technologies.split(",").map(tech => tech.trim()).filter(Boolean),
     };
     
-    const updatedProjects = [newProject, ...projects];
-    setProjects(updatedProjects);
-    localStorage.setItem("codingProjects", JSON.stringify(updatedProjects));
+    setProjects([newProject, ...projects]);
     
-    // Reset form
     setTitle("");
     setDescription("");
     setProjectUrl("");
@@ -78,9 +67,7 @@ const CodingPortfolioGenerator = () => {
   };
 
   const handleDeleteProject = (id: string) => {
-    const updatedProjects = projects.filter(project => project.id !== id);
-    setProjects(updatedProjects);
-    localStorage.setItem("codingProjects", JSON.stringify(updatedProjects));
+    setProjects(projects.filter(project => project.id !== id));
     toast.success("Project deleted successfully!");
   };
 

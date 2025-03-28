@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useNavigate, Link } from "react-router-dom";
+import { usePersistentState } from "@/utils/persistenceUtils";
 
 interface StartupIdea {
   id: string;
@@ -25,10 +26,7 @@ interface StartupIdea {
 const StartupIdeas = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [ideas, setIdeas] = useState<StartupIdea[]>(() => {
-    const savedIdeas = localStorage.getItem("startupIdeas");
-    return savedIdeas ? JSON.parse(savedIdeas) : [];
-  });
+  const [ideas, setIdeas] = usePersistentState<StartupIdea[]>("startupIdeas", []);
   
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -44,10 +42,6 @@ const StartupIdeas = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("startupIdeas", JSON.stringify(ideas));
-  }, [ideas]);
 
   const handleLogin = () => {
     if (password === "admin123") {
@@ -81,10 +75,8 @@ const StartupIdeas = () => {
       createdAt: new Date().toISOString(),
     };
     
-    const updatedIdeas = [newIdea, ...ideas];
-    setIdeas(updatedIdeas);
+    setIdeas([newIdea, ...ideas]);
     
-    // Reset form
     setTitle("");
     setDescription("");
     setMarketSize("");
@@ -97,8 +89,7 @@ const StartupIdeas = () => {
   };
 
   const handleDeleteIdea = (id: string) => {
-    const updatedIdeas = ideas.filter(idea => idea.id !== id);
-    setIdeas(updatedIdeas);
+    setIdeas(ideas.filter(idea => idea.id !== id));
     toast.success("Startup idea deleted successfully!");
   };
 
@@ -117,10 +108,8 @@ const StartupIdeas = () => {
     setIsImporting(true);
     
     try {
-      // Simulating Word document import by just reading text content
       const text = await selectedFile.text();
       
-      // Simple parsing of the content - in a real app, you'd need a proper Word parser
       const lines = text.split('\n');
       
       if (lines.length > 0) setTitle(lines[0] || '');
@@ -137,7 +126,6 @@ const StartupIdeas = () => {
     }
   };
 
-  // If not authenticated, show login form for admin access
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20">
@@ -157,7 +145,6 @@ const StartupIdeas = () => {
           </div>
           
           <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
-            {/* Display all ideas for visitors */}
             <div className="space-y-6">
               <Card className="border border-amber-200 dark:border-amber-800">
                 <CardHeader>
@@ -217,7 +204,6 @@ const StartupIdeas = () => {
               </Card>
             </div>
             
-            {/* Admin Login Form */}
             <div className="mt-8">
               <Card className="w-full max-w-md mx-auto border border-amber-200 dark:border-amber-800">
                 <CardHeader>
@@ -258,7 +244,6 @@ const StartupIdeas = () => {
     );
   }
 
-  // Admin view with form to add ideas
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20">
       <Navbar />
@@ -276,7 +261,6 @@ const StartupIdeas = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left column - Ideas list */}
           <div className="lg:col-span-1 space-y-6">
             <Card className="border border-amber-200 dark:border-amber-800">
               <CardHeader>
@@ -328,7 +312,6 @@ const StartupIdeas = () => {
             </Card>
           </div>
           
-          {/* Right column - Add new idea */}
           <div className="lg:col-span-2 space-y-6">
             <Card className="border border-amber-200 dark:border-amber-800">
               <CardHeader>

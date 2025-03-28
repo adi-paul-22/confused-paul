@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -96,7 +97,8 @@ const Admin = () => {
       createdAt: new Date().toISOString(),
       title: values.title,
       description: values.description,
-      technologies: values.technologies,
+      // Fix: Convert string to string[] for technologies
+      technologies: values.technologies.split(',').map(tech => tech.trim()).filter(Boolean),
       githubUrl: values.githubUrl || "",
       liveUrl: values.liveUrl || "",
     };
@@ -262,7 +264,8 @@ const Admin = () => {
               <ProjectCard 
                 key={project.id} 
                 project={project} 
-                onDelete={deleteProject}
+                // Fix: Make sure we're passing the id parameter to deleteProject
+                onDelete={() => deleteProject(project.id)}
               />
             ))}
           </div>
