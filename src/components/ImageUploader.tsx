@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { UploadCloud, X, Image as ImageIcon } from "lucide-react";
-import { uploadImage } from '@/utils/supabaseClient';
+import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 interface ImageUploaderProps {
@@ -50,17 +50,34 @@ const ImageUploader = ({
 
     setIsUploading(true);
     try {
-      const imageUrl = await uploadImage(file, storagePath);
-      
-      if (imageUrl) {
-        onImageUploaded(imageUrl);
-        toast.success('Image uploaded successfully');
-        // Clear the preview and file selection
-        setFile(null);
-        setPreviewUrl(null);
-      } else {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+      const filePath = `${storagePath}/${fileName}`;
+
+      const { data, error } = await supabase.storage
+        .from('images')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (error) {
+        console.error('Error uploading image:', error);
         toast.error('Failed to upload image');
+        return;
       }
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('images')
+        .getPublicUrl(filePath);
+        
+      onImageUploaded(publicUrl);
+      toast.success('Image uploaded successfully');
+      
+      // Clear the preview and file selection
+      setFile(null);
+      setPreviewUrl(null);
     } catch (error) {
       console.error('Upload error:', error);
       toast.error('An error occurred during upload');

@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from "react";
-import { MonitorSmartphone, Lock, Code, Tags, Plus, Trash, Save } from "lucide-react";
+import { MonitorSmartphone, Lock, Code, Tags, Plus, Trash, Save, Upload } from "lucide-react";
 import { type CodingProject } from "./ProjectCard";
 import ProjectCard from "./ProjectCard";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { usePersistentState } from "@/utils/persistenceUtils";
+import ImageUploader from "./ImageUploader";
 
 const CodingPortfolioGenerator = () => {
   const [projects, setProjects] = usePersistentState<CodingProject[]>("codingProjects", []);
@@ -69,6 +71,11 @@ const CodingPortfolioGenerator = () => {
   const handleDeleteProject = (id: string) => {
     setProjects(projects.filter(project => project.id !== id));
     toast.success("Project deleted successfully!");
+  };
+
+  const handleImageUploaded = (url: string) => {
+    setImageUrl(url);
+    toast.success("Image added to project");
   };
 
   if (!isAuthenticated) {
@@ -182,14 +189,23 @@ const CodingPortfolioGenerator = () => {
                 />
               </div>
               
-              <div className="space-y-2">
-                <Label htmlFor="imageUrl">Image URL</Label>
-                <Input 
-                  id="imageUrl"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="https://example.com/image.jpg"
+              <div className="space-y-2 md:col-span-2">
+                <ImageUploader 
+                  onImageUploaded={handleImageUploaded}
+                  storagePath="projects"
                 />
+                {imageUrl && imageUrl !== "placeholder.svg" && (
+                  <div className="mt-2">
+                    <p className="text-sm text-muted-foreground">Current image:</p>
+                    <div className="mt-1 h-20 w-auto rounded overflow-hidden border">
+                      <img 
+                        src={imageUrl} 
+                        alt="Project preview" 
+                        className="h-full w-auto object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
               
               <div className="space-y-2">
